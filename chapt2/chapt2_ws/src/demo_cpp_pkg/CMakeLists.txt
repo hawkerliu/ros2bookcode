@@ -16,27 +16,29 @@ find_package(rclcpp REQUIRED)
 # 2. 添加可执行文件 cpp_node
 add_executable(cpp_node src/cpp_node.cpp)
 # 3. 为 cpp_node 添加依赖
-ament_target_dependencies(cpp_node rclcpp)
+# target_link_libraries 这个命令已经被官方弃用, 
+# 官方推荐使用更现代的 CMake 方法，即直接用 target_link_libraries
+target_link_libraries(cpp_node rclcpp)
 
 add_executable(person_node src/person_node.cpp)
-ament_target_dependencies(person_node rclcpp)
+target_link_libraries(person_node rclcpp)
 
 
 add_executable(learn_auto src/learn_auto.cpp)
-ament_target_dependencies(learn_auto rclcpp)
+target_link_libraries(learn_auto rclcpp)
 
 
 add_executable(learn_shared_ptr src/learn_shared_ptr.cpp)
-ament_target_dependencies(learn_shared_ptr rclcpp)
+target_link_libraries(learn_shared_ptr rclcpp)
 
 add_executable(learn_lambda src/learn_lambda.cpp)
-ament_target_dependencies(learn_lambda rclcpp)
+target_link_libraries(learn_lambda rclcpp)
 
 add_executable(learn_function src/learn_function.cpp)
-ament_target_dependencies(learn_function rclcpp)
+target_link_libraries(learn_function rclcpp)
 include_directories(include)
 add_executable(learn_thread src/learn_thread.cpp)
-ament_target_dependencies(learn_thread rclcpp)
+target_link_libraries(learn_thread rclcpp)
 # 4. 将 cpp_node 拷贝到 install 目录
 install(TARGETS
   cpp_node
