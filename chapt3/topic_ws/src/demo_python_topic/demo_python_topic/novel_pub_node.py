@@ -30,5 +30,7 @@ def main():
     rclpy.init()
     node = NovelPubNode('novel_pub')
     node.download_novel('http://localhost:8000/novel1.txt')
+    node.download_novel('http://localhost:8000/novel2.txt')
+    node.download_novel('http://localhost:8000/novel3.txt')
     rclpy.spin(node)
     rclpy.shutdown()

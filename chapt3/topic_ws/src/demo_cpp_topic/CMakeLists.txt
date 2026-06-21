@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 4.2)
 project(demo_cpp_topic)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -9,13 +9,13 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(turtlesim REQUIRED)
+find_package(turtlesim_msgs REQUIRED)
 
 add_executable(turtle_circle  src/turtle_circle.cpp)
-ament_target_dependencies(turtle_circle rclcpp geometry_msgs)
+target_link_libraries(turtle_circle rclcpp::rclcpp geometry_msgs::geometry_msgs)
 
 add_executable(turtle_control  src/turtle_control.cpp)
-ament_target_dependencies(turtle_control rclcpp geometry_msgs turtlesim)
+target_link_libraries(turtle_control rclcpp::rclcpp geometry_msgs::geometry_msgs turtlesim_msgs::turtlesim_msgs)
 
 install(TARGETS
   turtle_control

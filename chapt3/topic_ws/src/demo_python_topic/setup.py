@@ -17,7 +17,11 @@ setup(
     maintainer_email='mzebra@foxmail.com',
     description='TODO: Package description',
     license='Apache-2.0',
-    tests_require=['pytest'],
+       extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'novel_pub_node=demo_python_topic.novel_pub_node:main',
