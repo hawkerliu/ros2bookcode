@@ -16,37 +16,37 @@ public:
 
 private:
     void on_pose_received_(const turtlesim_msgs::msg::Pose::SharedPtr pose) {
-    auto message = geometry_msgs::msg::Twist();
-    // 1.记录当前位置
-    double current_x = pose->x;
-    double current_y = pose->y;
-    RCLCPP_INFO(this->get_logger(), "当前位置:(x=%f,y=%f)", current_x, current_y);
+        auto message = geometry_msgs::msg::Twist();
+        // 1.记录当前位置
+        double current_x = pose->x;
+        double current_y = pose->y;
+        RCLCPP_INFO(this->get_logger(), "当前位置:(x=%f,y=%f)", current_x, current_y);
 
-    // 2.计算距离目标的距离，与当前海龟朝向的角度差
-    double distance =
-        std::sqrt((target_x_ - current_x) * (target_x_ - current_x) +
-                  (target_y_ - current_y) * (target_y_ - current_y));
-    double angle =
-        std::atan2(target_y_ - current_y, target_x_ - current_x) - pose->theta;
+        // 2.计算距离目标的距离，与当前海龟朝向的角度差
+        double distance =
+            std::sqrt((target_x_ - current_x) * (target_x_ - current_x) +
+                    (target_y_ - current_y) * (target_y_ - current_y));
+        double angle =
+            std::atan2(target_y_ - current_y, target_x_ - current_x) - pose->theta;
 
-    // 3.控制策略：距离大于0.1继续运动，角度差大于0.2则原地旋转，否则直行
-    if (distance > 0.1) {
-      if(fabs(angle)>0.2)
-      {
-        message.angular.z = fabs(angle);
-      }else{
-        // 通过比例控制器计算输出速度
-        message.linear.x = k_ * distance;
+        // 3.控制策略：距离大于0.1继续运动，角度差大于0.2则原地旋转，否则直行
+        if (distance > 0.1) {
+        if(fabs(angle)>0.2)
+        {
+            message.angular.z = fabs(angle);
+        }else{
+            // 通过比例控制器计算输出速度
+            message.linear.x = k_ * distance;
 
-      }
+        }
+        }
+
+        // 4.限制最大值并发布消息
+        if (message.linear.x > max_speed_) {
+        message.linear.x = max_speed_;
+        }
+        velocity_publisher_->publish(message);
     }
-
-    // 4.限制最大值并发布消息
-    if (message.linear.x > max_speed_) {
-       message.linear.x = max_speed_;
-    }
-    velocity_publisher_->publish(message);
-  }
 
 
 private:
