@@ -2,7 +2,7 @@
 #include <QLabel>
 #include <QString>
 #include "rclcpp/rclcpp.hpp"
-#include "status_interfaces/msg/system_status.hpp"
+#include "status_interfaces//msg/system_status.hpp"
 
 using SystemStatus = status_interfaces::msg::SystemStatus;
 

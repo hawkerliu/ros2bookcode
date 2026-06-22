@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 4.2)
 project(status_display)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -17,7 +17,9 @@ target_link_libraries(hello_qt Qt5::Widgets)
 
 add_executable(sys_status_display src/sys_status_display.cpp)
 target_link_libraries(sys_status_display Qt5::Widgets) # 对于非ROS功能包使用Cmake原生指令进行链接库
-ament_target_dependencies(sys_status_display rclcpp status_interfaces)
+# 从 ROS 2 Kilted 版本开始，ament_target_dependencies() 函数已经被官方弃用。官方推荐直接使用 CMake 标准的 target_link_libraries() 配合现代 CMake 目标
+# ament_target_dependencies(sys_status_display rclcpp status_interfaces)
+target_link_libraries(sys_status_display rclcpp::rclcpp status_interfaces::status_interfaces)
 
 
 install(TARGETS hello_qt sys_status_display
