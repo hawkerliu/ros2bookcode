@@ -17,7 +17,11 @@ setup(
     maintainer_email='87068644+fishros@users.noreply.github.com',
     description='TODO: Package description',
     license='TODO: License declaration',
-    tests_require=['pytest'],
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'reliability_test=learn_qos_py.reliability_test:main'

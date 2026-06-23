@@ -17,7 +17,11 @@ setup(
     maintainer_email='87068644+fishros@users.noreply.github.com',
     description='TODO: Package description',
     license='TODO: License declaration',
-    tests_require=['pytest'],
+    extras_require={
+        'test': [
+            'pytest',
+        ],
+    },
     entry_points={
         'console_scripts': [
             'init_robot_pose=fishbot_application.init_robot_pose:main',
