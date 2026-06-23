@@ -1,6 +1,6 @@
 #include "geometry_msgs/msg/twist.hpp"
 #include "rclcpp/rclcpp.hpp"
-#include "turtlesim/msg/pose.hpp"
+#include "turtlesim_msgs/msg/pose.hpp"
 #include "chapt4_interfaces/srv/patrol.hpp"
 using Patrol = chapt4_interfaces::srv::Patrol;
 #include "rcl_interfaces/msg/set_parameters_result.hpp"
@@ -14,7 +14,7 @@ public:
     {
         velocity_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>(
             "/turtle1/cmd_vel", 10);
-        pose_subscription_ = this->create_subscription<turtlesim::msg::Pose>(
+        pose_subscription_ = this->create_subscription<turtlesim_msgs::msg::Pose>(
             "/turtle1/pose", 10,
             std::bind(&TurtleController::on_pose_received_, this, std::placeholders::_1));
              // 3.创建服务
@@ -58,7 +58,7 @@ public:
     }
 
 private:
-    void on_pose_received_(const turtlesim::msg::Pose::SharedPtr pose) {
+    void on_pose_received_(const turtlesim_msgs::msg::Pose::SharedPtr pose) {
     auto message = geometry_msgs::msg::Twist();
     // 1.记录当前位置
     double current_x = pose->x;
@@ -96,7 +96,7 @@ private:
   // 2.添加 Patrol 类型服务共享指针 patrol_server_ 为成员变量
   rclcpp::Service<Patrol>::SharedPtr patrol_server_;
 
-    rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr pose_subscription_;
+    rclcpp::Subscription<turtlesim_msgs::msg::Pose>::SharedPtr pose_subscription_;
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr velocity_publisher_;
     double target_x_{1.0};  // 目标位置X,设置默认值1.0
     double target_y_{1.0};  // 目标位置Y,设置默认值1.0

@@ -10,13 +10,13 @@ find_package(ament_cmake REQUIRED)
 find_package(chapt4_interfaces REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(turtlesim REQUIRED)
+find_package(turtlesim_msgs REQUIRED)
 
 add_executable(turtle_control  src/turtle_control.cpp)
-ament_target_dependencies(turtle_control rclcpp geometry_msgs turtlesim chapt4_interfaces)
+target_link_libraries(turtle_control rclcpp::rclcpp geometry_msgs::geometry_msgs turtlesim_msgs::turtlesim_msgs chapt4_interfaces::chapt4_interfaces)
 
 add_executable(patrol_client  src/patrol_client.cpp)
-ament_target_dependencies(patrol_client rclcpp geometry_msgs turtlesim chapt4_interfaces)
+target_link_libraries(patrol_client rclcpp::rclcpp geometry_msgs::geometry_msgs turtlesim_msgs::turtlesim_msgs chapt4_interfaces::chapt4_interfaces)
 
 
 install(TARGETS
