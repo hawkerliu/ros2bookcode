@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 4.2)
 project(demo_cpp_tf)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
@@ -14,13 +14,13 @@ find_package(geometry_msgs REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
 add_executable(static_tf_broadcaster src/static_tf_broadcaster.cpp)
-ament_target_dependencies(static_tf_broadcaster rclcpp tf2 tf2_ros geometry_msgs tf2_geometry_msgs)
+target_link_libraries(static_tf_broadcaster rclcpp::rclcpp tf2::tf2 tf2_ros::tf2_ros geometry_msgs::geometry_msgs tf2_geometry_msgs::tf2_geometry_msgs)
 
 add_executable(dynamic_tf_broadcaster src/dynamic_tf_broadcaster.cpp)
-ament_target_dependencies(dynamic_tf_broadcaster rclcpp tf2 tf2_ros geometry_msgs tf2_geometry_msgs)
+target_link_libraries(dynamic_tf_broadcaster rclcpp::rclcpp tf2::tf2 tf2_ros::tf2_ros geometry_msgs::geometry_msgs tf2_geometry_msgs::tf2_geometry_msgs)
 
 add_executable(tf_listener src/tf_listener.cpp)
-ament_target_dependencies(tf_listener rclcpp tf2 tf2_ros geometry_msgs tf2_geometry_msgs)
+target_link_libraries(tf_listener rclcpp::rclcpp tf2::tf2 tf2_ros::tf2_ros geometry_msgs::geometry_msgs tf2_geometry_msgs::tf2_geometry_msgs)
 
 
 

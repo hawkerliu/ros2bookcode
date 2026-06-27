@@ -1,7 +1,7 @@
 #include <memory>
 #include "geometry_msgs/msg/transform_stamped.hpp" // 提供消息接口
 #include "rclcpp/rclcpp.hpp"
-#include "tf2/LinearMath/Quaternion.h"             // 提供 tf2::Quaternion 类
+#include "tf2/LinearMath/Quaternion.hpp"             // 提供 tf2::Quaternion 类
 #include "tf2_geometry_msgs/tf2_geometry_msgs.hpp" // 提供消息类型转换函数
 #include "tf2_ros/transform_broadcaster.h"         // 提供坐标广播器类
 #include <chrono>                                  // 引入时间相关头文件
